@@ -1,7 +1,8 @@
-import React from "react";
-import { Link } from 'react-router-dom'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
+  const [user, steUser] = useState("Admin");
   return (
     <>
       <nav
@@ -56,6 +57,17 @@ const Header = () => {
                 <Link className="nav-link" to="/contact">
                   Contact us
                 </Link>
+              </li>
+              <li>
+                {user == "Admin" ? (
+                  <Link className="nav-link" to="/admin">
+                    Admin
+                  </Link>
+                ) : (
+                  <Link className="nav-link" to="/user">
+                    User
+                  </Link>
+                )}
               </li>
             </ul>
 

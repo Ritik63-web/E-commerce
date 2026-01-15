@@ -1,14 +1,18 @@
-import React from "react";
+import React,{useState} from "react";
 import { Link } from 'react-router-dom'
 
 
 const Hero = ({title}) => {
+  const [user, setUser] = useState("User")
   return (
     <>
       <div className="hero">
         <div className="container">
           <div className="row justify-content-between">
-            <div className="col-lg-5">
+            {
+              user == "User"?
+              (<div className="row">
+                <div className="col-lg-5">
               <div className="intro-excerpt">
                 <h1>
                    {title}
@@ -33,6 +37,15 @@ const Hero = ({title}) => {
                 <img src="images/couch.png" className="img-fluid" alt="pic"/>
               </div>
             </div>
+            </div>
+              ):(
+                <div className="text-center">
+                <h1>
+                   {title}
+                </h1>
+                </div>
+              )
+            }
           </div>
         </div>
       </div>
