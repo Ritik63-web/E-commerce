@@ -12,7 +12,7 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import UserProfile from "./Pages/UserProfile";
 import HomeAdmin from "./Pages/Admin/HomeAdmin";
-import AddTeam from "./Pages/Admin/AddTeam";
+// import AddTeam from "./Pages/Admin/AddTeam";
 import ErrorPage from "./Pages/ErrorPage";
 
 function App() {
