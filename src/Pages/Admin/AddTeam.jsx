@@ -1,50 +1,95 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { TeamContext } from "../../Context/TeamContext";
 
 const AddTeam = () => {
+  const { teamDetails, setTeamDetails } = useContext(TeamContext);
+  const [error, setError] = useState({});
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setTeamDetails((pre) => ({
+      ...pre,
+      [name]: value,
+    }));
+  }
+  function validate() {
+    let newErrors = {};
+    if (!teamDetails.name) {
+      newErrors.name = "Team Name is required";
+    }
+    if (!teamDetails.position) {
+      newErrors.position = "Team Position is required";
+    }
+    if (!teamDetails.about) {
+      newErrors.about = "Team about is required";
+    }
+    if (!teamDetails.teamPic) {
+      newErrors.teamPic = "Team Image is required";
+    }
+
+    setError(newErrors);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    if (validate()) {
+      localStorage.setItem("Team Details", JSON.stringify(teamDetails));
+    }
+  }
   return (
     <>
       <div className="container team">
         <h1 className="text-center my-bg fs-4 text-center text-light rounded-2 py-1">
           Add Team
         </h1>
-        <form action="">
-        <div className="row mb-3">
-          <input
-            type="text"
-            className="form-control"
-            name="name"
-            placeholder="Team Member Name"
-          />
-        </div>
-        <div className="row mb-3">
-          <input
-            type="text"
-            className="form-control"
-            name="position"
-            placeholder="Position"
-          />
-        </div>
-        <div className="row mb-3">
-          <input
-            type="text"
-            className="form-control"
-            name="about"
-            placeholder="Bio"
-          />
-        </div>
-        <div className="row mb-3">
-          <input
-            type="file"
-            className=""
-            name="teamPic"
-            placeholder="Bio"
-          />
-        </div>
-        <div className="row mb-3 justify-content-center">
-          <div className="col-md-6">
-          <button type='submit' className="btn btn-primary fs-5 w-100">Submit</button>
+        <form action="" onSubmit={handleSubmit}>
+          <div className="row mb-3">
+            <input
+              type="text"
+              className="form-control"
+              name="name"
+              placeholder="Team Member Name"
+              onChange={(e) => handleChange(e)}
+            />
+            {error && <p className='text-danger mb-0'>{error.name}</p> }
           </div>
-        </div>
+          <div className="row mb-3">
+            <input
+              type="text"
+              className="form-control"
+              name="position"
+              placeholder="Position"
+              onChange={(e) => handleChange(e)}
+            />
+            {error && <p className='text-danger mb-0'>{error.position}</p> }
+          </div>
+          <div className="row mb-3">
+            <input
+              type="text"
+              className="form-control"
+              name="about"
+              placeholder="Bio"
+              onChange={(e) => handleChange(e)}
+            />
+            {error && <p className='text-danger mb-0'>{error.about}</p> }
+          </div>
+          <div className="row mb-3">
+            <input
+              type="file"
+              className=""
+              name="teamPic"
+              placeholder="Bio"
+              onChange={(e) => handleChange(e)}
+            />
+            {error && <p className='text-danger mb-0'>{error.teamPic}</p> }
+          </div>
+          <div className="row mb-3 justify-content-center">
+            <div className="col-md-6">
+              <button type="submit" className="btn btn-primary fs-5 w-100">
+                Submit
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     </>
