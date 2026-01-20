@@ -35,6 +35,7 @@ const AddTeam = () => {
     if (validate()) {
       localStorage.setItem("Team Details", JSON.stringify(teamDetails));
     }
+    console.log(teamDetails);
   }
   return (
     <>
